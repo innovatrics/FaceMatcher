@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Starts the dependencies, migrates the database, creates the S3 bucket and starts the services and Face Matcher UI.
-# Stacks built on Face Matcher run this first; they may export FACE_MATCHER_UI_IDENTIFICATION and STATION_PUBLIC_HOST.
+# Stacks built on Face Matcher run this first; they may export FACE_MATCHER_UI_IDENTIFICATION.
 
 set -e
 
@@ -22,9 +22,6 @@ chmod a+r secrets/iengine.lic
 # the services mount iengine.lic from the deployment directory
 [ -e iengine.lic ] || ln -sf secrets/iengine.lic iengine.lic
 chmod a+r iengine.lic
-
-# Station hands the browser presigned S3 URLs; they must point at this host
-export STATION_PUBLIC_HOST="${STATION_PUBLIC_HOST:-$(hostname)}"
 
 # face-matcher-network lets the dependency and the platform containers reach each other.
 # This is a no-op if the network already exists, which we don't mind.

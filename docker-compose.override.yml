@@ -13,8 +13,6 @@ services:
     env_file:
       - ./.env.face-matcher-ui
     environment:
-      # Browser-reachable address of the S3 storage; run.sh sets STATION_PUBLIC_HOST.
-      S3_PUBLIC_ENDPOINT: http://${STATION_PUBLIC_HOST:-localhost}:8333
       IDENTIFICATION_ENABLED: "${FACE_MATCHER_UI_IDENTIFICATION:-true}"
     volumes:
       - ./iengine.lic:/etc/innovatrics/iengine.lic:ro
