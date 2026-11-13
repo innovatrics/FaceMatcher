@@ -12,6 +12,8 @@ services:
       - "${FACE_MATCHER_UI_PORT:-8000}:8000"
     env_file:
       - ./.env.face-matcher-ui
+      # Only with the login on (README, "Turning the login on"): the client secret, KEYCLOAK_CLIENT_SECRET.
+      # - ./secrets/face-matcher-ui.env
     environment:
       IDENTIFICATION_ENABLED: "${FACE_MATCHER_UI_IDENTIFICATION:-true}"
     volumes:
@@ -20,6 +22,8 @@ services:
       - ./branding/face-matcher-ui/logo-product-without-text.svg:/build/branding/logo-product-without-text.svg:ro
       - ./branding/face-matcher-ui/favicon-product.ico:/build/branding/favicon-product.ico:ro
       - ./branding/face-matcher-ui/naming-product.json:/build/branding/naming-product.json:ro
+      # Only with the login on: the key and the certificate of the UI's HTTPS, server.key and server.crt.
+      # - ./secrets/tls:/certs:ro
   base:
     restart: unless-stopped
     user: root
